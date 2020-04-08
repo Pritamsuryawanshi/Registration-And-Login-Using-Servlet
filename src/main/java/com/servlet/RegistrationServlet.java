@@ -12,27 +12,27 @@ import java.io.PrintWriter;
 
 @WebServlet(
         description = "Login Servlet Testing",
-        urlPatterns = {"/LoginServlet"},
+        urlPatterns = {"/Register"},
         initParams = {
-                @WebInitParam(name = "user", value = "^[A-Z]{1}[a-z]{3,}$"),
-                @WebInitParam(name = "password", value = "((?=.*\\d)(?=.*[A-Z])(?=.*[@#$%]).{8,15})")
+                @WebInitParam(name = "users", value = "^[A-Z]{1}[a-z]{3,}$"),
+                @WebInitParam(name = "passwords", value = "((?=.*\\d)(?=.*[A-Z])(?=.*[@#$%]).{8,15})")
         }
 )
-public class LoginServlet extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pwd = request.getParameter("pwd");
+        String user = request.getParameter("userName");
+        String pwd = request.getParameter("paswd");
 
-        String userID = getServletConfig().getInitParameter("user");
-        String password = getServletConfig().getInitParameter("password");
+        String userID = getServletConfig().getInitParameter("users");
+        String password = getServletConfig().getInitParameter("passwords");
         if (user.matches(userID) && pwd.matches(password)) {
             request.setAttribute("user", user);
-            request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
+            request.getRequestDispatcher("/RegistrationSuccess.jsp").forward(request, response);
         } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Registration.html");
             PrintWriter out = response.getWriter();
-            out.println("<font color=red>Either user name or password is wrong</font>");
+            out.println("<font color=red>Please follow username and password standards to register,</font>");
             rd.include(request, response);
         }
     }
