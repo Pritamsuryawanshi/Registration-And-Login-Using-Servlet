@@ -14,7 +14,7 @@ import java.io.PrintWriter;
         description = "Login Servlet Testing",
         urlPatterns = {"/LoginServlet"},
         initParams = {
-                @WebInitParam(name = "user", value = "Narayan"),
+                @WebInitParam(name = "user", value = "^[A-Z]{1}[a-z]{3,}$"),
                 @WebInitParam(name = "password", value = "Bridgelabz")
         }
 )
@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 
         String userID = getServletConfig().getInitParameter("user");
         String password = getServletConfig().getInitParameter("password");
-        if (userID.equals(user) && password.equals(pwd)) {
+        if (user.matches(userID) && pwd.matches(password)) {
             request.setAttribute("user", user);
             request.getRequestDispatcher("/LoginSuccess.jsp").forward(request, response);
         } else {
