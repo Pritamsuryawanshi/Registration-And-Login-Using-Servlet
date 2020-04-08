@@ -15,7 +15,7 @@ import java.io.PrintWriter;
         urlPatterns = {"/LoginServlet"},
         initParams = {
                 @WebInitParam(name = "user", value = "^[A-Z]{1}[a-z]{3,}$"),
-                @WebInitParam(name = "password", value = "Bridgelabz")
+                @WebInitParam(name = "password", value = "((?=.*\\d)(?=.*[A-Z])(?=.*[@#$%]).{8,15})")
         }
 )
 public class LoginServlet extends HttpServlet {
